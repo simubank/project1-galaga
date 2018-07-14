@@ -7,7 +7,7 @@
     "serve": "cross-env BABEL_ENV=development webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "lint": "eslint --ext .js,.vue src",
     "test": "npm run lint",
-    "precommit": "lint-staged",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "axios": "0.17.1",
