@@ -14,6 +14,8 @@ const getters = {
   addRouters: state => state.permission.addRouters,
   netIncome: state => state.netBalance.income,
   netSaving: state => state.netBalance.saving,
-  netSpending: state => state.netBalance.spending
+  netSpending: state => state.netBalance.spending,
+  goalSaving: state => state.netBalance.goalSaving,
+  goalSpending: state => state.netBalance.goalSpending
 }
 export default getters

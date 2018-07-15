@@ -7,6 +7,7 @@ import echarts from 'echarts'
 require('echarts/theme/macarons') // echarts theme
 import { debounce } from '@/utils'
 import { fetchList } from '@/api/transaction'
+import { mapGetters } from 'vuex'
 
 export default {
   props: {
@@ -47,6 +48,11 @@ export default {
     this.chart.dispose()
     this.chart = null
   },
+  computed: {
+    ...mapGetters([
+      'netSaving'
+    ])
+  },
   methods: {
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
@@ -57,7 +63,12 @@ export default {
             name: item.category
           }
         })
+        this.list.push({
+          value: this.netSaving,
+          name: 'Saving'
+        })
         this.category = response.data.category
+        this.category.push('Saving')
         this.chart.setOption({
           tooltip: {
             trigger: 'item',

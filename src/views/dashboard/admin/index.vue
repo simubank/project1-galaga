@@ -13,12 +13,8 @@
         </div>
       </el-col>
       <el-col :xs="{span: 24}" :sm="{span: 24}" :lg="{span: 12}" style="padding-right:8px;margin-bottom:30px;">
-        <transaction-table v-bind:income="netIncome"></transaction-table>
+        <transaction-table></transaction-table>
       </el-col>
-
-      <el-row :xs="{span: 24}" :sm="{span: 24}" :lg="{span: 12}" style="padding-right:8px;margin-bottom:30px;">
-          <fund-card></fund-card>
-        </el-row>
     </el-row>
     <el-row :gutter="32">
       <el-col :xs="24" :sm="24" :lg="24">
@@ -41,12 +37,21 @@ export default {
     PieChart,
     TransactionTable,
     FundCard
-
   },
   data() {
     return {
       netIncome: 1000
     }
+  },
+  created() {
+    // will need to call something for getting net balance
+    this.netIncome = 1000
+    var balance = {
+      netIncome: this.netIncome,
+      netSaving: 100,
+      netSpending: 0
+    }
+    this.$store.dispatch('setNetBalance', balance)
   }
 }
 </script>

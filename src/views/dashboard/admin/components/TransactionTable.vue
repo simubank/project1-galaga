@@ -38,12 +38,6 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'transactionTable',
-  props: {
-    income: {
-      type: Number,
-      default: 0
-    }
-  },
   data() {
     return {
       list: null,
@@ -71,14 +65,14 @@ export default {
     calculateSaving() {
       var saving = this.list.reduce((accumulator, currentValue) => {
         return accumulator - currentValue.customAmount
-      }, this.income)
+      }, this.netIncome)
       this.totalSaving = Math.round(saving * 100) / 100
       var balance = {
-        netIncome: this.income,
-        netSaving: this.totalSaving,
-        netSpending: this.income - this.totalSaving
+        goalSaving: this.totalSaving,
+        goalSpending: this.netIncome - this.totalSaving
       }
-      this.$store.dispatch('setNetBalance', balance)
+      // saves goal balance to store
+      this.$store.dispatch('setGoalBalance', balance)
     }
   },
   computed: {

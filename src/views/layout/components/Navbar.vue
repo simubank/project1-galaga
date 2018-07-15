@@ -47,6 +47,8 @@ export default {
       this.$store.dispatch('toggleSideBar')
     },
     logout() {
+      // clear netBalance on user logout
+      this.$store.dispatch('clearNetBalance')
       this.$store.dispatch('LogOut').then(() => {
         location.reload()// In order to re-instantiate the vue-router object to avoid bugs
       })
