@@ -11,6 +11,9 @@ const getters = {
   roles: state => state.user.roles,
   setting: state => state.user.setting,
   permission_routers: state => state.permission.routers,
-  addRouters: state => state.permission.addRouters
+  addRouters: state => state.permission.addRouters,
+  netIncome: state => state.netBalance.income,
+  netSaving: state => state.netBalance.saving,
+  netSpending: state => state.netBalance.spending
 }
 export default getters

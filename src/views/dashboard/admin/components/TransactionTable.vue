@@ -34,6 +34,7 @@
 
 <script>
 import { fetchList } from '@/api/transaction'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'transactionTable',
@@ -72,7 +73,18 @@ export default {
         return accumulator - currentValue.customAmount
       }, this.income)
       this.totalSaving = Math.round(saving * 100) / 100
+      var balance = {
+        netIncome: this.income,
+        netSaving: this.totalSaving,
+        netSpending: this.income - this.totalSaving
+      }
+      this.$store.dispatch('setNetBalance', balance)
     }
+  },
+  computed: {
+    ...mapGetters([
+      'netIncome'
+    ])
   }
 }
 </script>
