@@ -15,6 +15,10 @@
       <el-col :xs="{span: 24}" :sm="{span: 24}" :lg="{span: 12}" style="padding-right:8px;margin-bottom:30px;">
         <transaction-table v-bind:income="netIncome"></transaction-table>
       </el-col>
+
+      <el-row :xs="{span: 24}" :sm="{span: 24}" :lg="{span: 12}" style="padding-right:8px;margin-bottom:30px;">
+          <fund-card></fund-card>
+        </el-row>
     </el-row>
     <el-row :gutter="32">
       <el-col :xs="24" :sm="24" :lg="24">
@@ -28,12 +32,16 @@
 <script>
 import PieChart from './components/PieChart'
 import TransactionTable from './components/TransactionTable'
+//  import FundOptions from './components/FundOptions'
+import FundCard from './components/FundCard'
 
 export default {
   name: 'dashboard-admin',
   components: {
     PieChart,
-    TransactionTable
+    TransactionTable,
+    FundCard
+
   },
   data() {
     return {
