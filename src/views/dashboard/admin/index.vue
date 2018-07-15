@@ -28,8 +28,9 @@
 <script>
 import PieChart from './components/PieChart'
 import TransactionTable from './components/TransactionTable'
-//  import FundOptions from './components/FundOptions'
-import FundCard from './components/FundCard'
+// import FundOptions from './components/FundOptions'
+// import FundCard from './components/FundCard'
+import FundCard from '../../../components/FundCard'
 
 export default {
   name: 'dashboard-admin',

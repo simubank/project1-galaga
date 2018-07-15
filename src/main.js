@@ -16,6 +16,9 @@ import './permission' // permission control
 import './mock' // simulation data
 
 import * as filters from './filters' // global filters
+import VueResource from 'vue-resource'
+
+Vue.use(VueResource)
 
 Vue.use(Element, {
   size: 'medium' // set element-ui default size
