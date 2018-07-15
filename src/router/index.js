@@ -37,7 +37,18 @@ export const constantRouterMap = [
       path: 'dashboard',
       component: () => import('@/views/dashboard/index'),
       name: 'dashboard',
-      meta: { title: 'dashboard', icon: 'dashboard', noCache: true }
+      meta: { title: 'dashboard', icon: 'star', noCache: true }
+    }]
+  },
+  {
+    path: '/fundlist',
+    component: Layout,
+    redirct: 'noredirect',
+    children: [{
+      path: 'fundlist',
+      component: () => import('@/views/fundlist/index'),
+      name: 'fundlist',
+      meta: { title: 'Fundlist', icon: 'dollar', noCache: true }
     }]
   }
 ]
