@@ -1,9 +1,10 @@
+import json
+import pandas as pd
+import requests
+import sys
 
 def get_customer_transaction_data(customer_id):
-    import json
-    import pandas as pd
-    import requests
-    import requests
+
     response = requests.get('https://dev.botsfinancial.com/api/customers/'+customer_id+'/transactions', headers={'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDQlAiLCJ0ZWFtX2lkIjoiMjgxMzc2NyIsImV4cCI6OTIyMzM3MjAzNjg1NDc3NSwiYXBwX2lkIjoiMjk3ZjAwY2ItNThhNy00YTAzLTk3ZTAtYzhkMDlkMGFlYTU1In0.PPJpBOA6UMC5eZVRry4GmMQTh6zH7S_h6A7Z9ZoYS3A'})
     json_file = response.json()
     json_file = json.dumps(json_file)
@@ -42,11 +43,20 @@ def get_customer_transaction_data(customer_id):
     expense_dict = dict()
     for key in dict_expense:
         expense_dict[key] = dict_expense[key]['currencyAmount']
+
+    output = {}
+    output["netBalance"] = net_balance
+    output["netSpending"] = net_spending
+    output["netIncome"] = net_income
+    output["incomeCategory"] = income_dict
+    output["expenseCategory"] = expense_dict
    
-    return net_balance,  net_spending, net_income, income_dict,expense_dict
+    print(output)
+    return output
 
 
+if __name__ == '__main__':
+    get_customer_transaction_data(sys.argv[1])
 
 
-get_customer_transaction_data('297f00cb-58a7-4a03-97e0-c8d09d0aea55_e2ba9727-a181-48f6-a1bc-0abf5ce173a2')
 
