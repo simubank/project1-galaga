@@ -14,13 +14,14 @@ def GetFundInfo():
     categoryHtml = soup.find("label", attrs={"for":"category"})
     minInvestHtml = soup.find("label", attrs={"for":"minimumInvestment"})
     descriptionHtml = soup.find("input", attrs={"id":"fundNameHidden"})
+    symbolHtml = soup.find("p", attrs={"class":"td-layout-grid3 td-layout-column"})
 
     returnList = {}
     performanceList = {}
     attribution = {}
 
     # The first tr contains the field names.
-    headings = [th.get_text() for th in table.find("tr").find_all("th")]
+    headings = [th.get_text().strip() for th in table.find("tr").find_all("th")]
 
     datasets = []
     for row in table.find_all("tr")[1:]:
@@ -29,7 +30,7 @@ def GetFundInfo():
 
     for dataset in datasets:
         for field in dataset:
-        	performanceList[field[0]] = field[1].strip()
+        	performanceList[field[0].replace(" ", "")] = field[1].strip()
 
     date = re.search(r'(Jan(uary)?|Feb(ruary)?|Mar(ch)?|Apr(il)?|May|Jun(e)?|Jul(y)?|Aug(ust)?|Sep(tember)?|Oct(ober)?|Nov(ember)?|Dec(ember)?)\s+\d{1,2},\s+\d{4}', navHtml.get_text())
     nav = navHtml.find_all('strong')[0].get_text()
@@ -50,6 +51,10 @@ def GetFundInfo():
 
     description = descriptionHtml.get('value')
     attribution["description"] = description.strip()
+
+    symbol = symbolHtml.get_text().strip()
+    symbol = re.search(r'TDB.+', symbol)
+    attribution["symbol"] = symbol.group()
 
     returnList["attribution"] = attribution
     returnList["performanceList"] = performanceList
