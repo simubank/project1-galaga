@@ -2,7 +2,7 @@
   <div class="dashboard-editor-container">
     <el-row :gutter="32">
       <el-col :xs="24" :sm="24" :lg="12">
-        <h2>Hi Angela</h2>
+        <h2>Hi {{username}}</h2>
         <p>You net income is: {{netIncome}}</p>
       </el-col>
     </el-row>
@@ -42,7 +42,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'netIncome'
+      'netIncome',
+      'username'
     ])
   }
 }
