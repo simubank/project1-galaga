@@ -20,8 +20,12 @@ def get_customer_transaction_data(customer_id):
     for item in categoryTags_list:
         str1 = ' '.join(item)
         flat_list.append(str1)
+    flat_list_nsp = [] 
+    for item in flat_list:
+        item = item.replace(" ", "")
+        flat_list_nsp.append(item)
 
-    df_transaction['categoryTags'] = flat_list
+    df_transaction['categoryTags'] = flat_list_nsp
     #convert all creditcard purchase to negative values
     df_transaction.loc[df_transaction.type == 'CreditCardTransaction', 'currencyAmount'] = -1 * df_transaction['currencyAmount']
     
