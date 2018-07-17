@@ -1,77 +1,47 @@
 <template>
-    <el-card class = "fundCard">
-        <el-container>
-            <el-header>
-                <el-row :gutter="20">
-                  <el-col :span="20">
-                      <h4 style="margin-bottom:0px;">TDB903</h4>
-                      <h4>TD Dow Jones Industrial Avg Index - e {{ fundId }}</h4>
-                  </el-col>
-                  <el-col :span="4">
-                      MER:0.01%</br>
-                      NAV:$30
-                  </el-col>
-                </el-row>
-            </el-header>
-                <!-- Include Info Bar and Return Table -->
-            <el-row :gutter="20">
-                <el-col :span="20">
-                    <el-main>
-                        <!-- Info Bar -->
-                        <el-row :gutter="20">
-                          <el-col :span="5">Category:Sector</el-col>
-                          <el-col :span="5">Min Invest:100</el-col>
-                          <el-col :span="5">Invest Style:Large Blend</el-col>
-                          <el-col :span="5">Risk:Abv Avg</el-col>
-                        </el-row>
-                        <!-- Return Table -->
-                        <el-table
-                            :data="tableData"
-                            style="width: 100%">
-                            <el-table-column
-                              prop="Mo1"
-                              label="1 Mo">
-                            </el-table-column>
-                            <el-table-column
-                              prop="Mo3"
-                              label="3 Mo">
-                            </el-table-column>
-                            <el-table-column
-                              prop="Mo6"
-                              label="6 Mo">
-                            </el-table-column>
-                            <el-table-column
-                              prop="Yr1"
-                              label="1 YR">
-                            </el-table-column>
-                            <el-table-column
-                              prop="Yr2"
-                              label="2 YR">
-                            </el-table-column>
-                            <el-table-column
-                              prop="Yr3"
-                              label="3 YR">
-                            </el-table-column>
-                            <el-table-column
-                              prop="Yr5"
-                              label="5 YR">
-                            </el-table-column>
-                            <el-table-column
-                              prop="Yr10"
-                              label="10 YR">
-                            </el-table-column>
-                        </el-table>
-                    </el-main>
-                </el-col>
-                <!-- User Invest Input -->
-                <el-col :span="4">
-                    Try to Simulate invest
-                    <el-input v-model="input" size="small" style="width:50px"></el-input>%
-                    of your net saving!
-                </el-col>
-            </el-row>
-        </el-container>
-    </el-card>
+  <el-card class = "fundCard">
+    <el-container>
+      <el-header>
+        <el-row class="green-border" :gutter="20">
+          <el-col :span="20">
+            <div class="header-title-wrap code-wrap">{{fund.code}}</div>
+            <div class="header-title-wrap title-wrap">{{fund.title}}</div>
+          </el-col>
+          <el-col :span="4">
+            <div class="header-side-wrap nav-wrap">NAV: ${{fund.nav}}</div>
+            <div class="header-side-wrap mer-wrap">MER: {{fund.mer}}</div>
+          </el-col>
+        </el-row>
+      </el-header>
+      <!-- Include Info Bar and Return Table -->
+      <el-main style="padding-top:0px">
+        <el-row :gutter="20">
+          <el-col :span="18">
+            <div class="fund-info-wrapper">
+              <div class="fund-info"><b>Category:</b> {{fund.category}}</div>
+              <div class="fund-info"><b>Min Invest:</b> {{fund.minInvest}}</div>
+            </div>
+            <div class="fund-info-wrapper">
+              <div class="fund-info"><b>Invest Style:</b> {{fund.style}}</div>
+              <div class="fund-info"><b>Risk:</b> {{fund.risk}}</div>
+            </div>
+            <!-- Return Table -->
+            <el-table :data="tableData" style="width: 100%">
+              <el-table-column v-for="(header,index) of tableHeader" :prop="header.prop" :label="header.label" :key="index">
+              </el-table-column>
+            </el-table>
+          </el-col>
+          <!-- User Invest Input -->
+          <el-col :span="6">
+            <div class="block">
+              <span class="demonstration">Drag to invest your saving (%)</span>
+              <el-slider v-model="input"></el-slider>
+            </div>
+          </el-col>
+        </el-row>
+      </el-main>
+    </el-container>
+  </el-card>
 </template>
 
 <script>
@@ -80,6 +50,28 @@ export default {
   props: ['fundId'],
   data() {
     return {
+      input: 0,
+      fund: {
+        mer: '0.2%',
+        nav: '30',
+        code: 'TDB903',
+        title: 'TD NASDAQ Index - e',
+        category: 'sector',
+        minInvest: '100',
+        style: 'large blend',
+        risk: 'high',
+        change: '-0.09 (-0.40%)'
+      },
+      tableHeader: [
+        { prop: 'Mo1', label: '1 Mo' },
+        { prop: 'Mo3', label: '3 Mo' },
+        { prop: 'Mo6', label: '6 Mo' },
+        { prop: 'Yr1', label: '1 Yr' },
+        { prop: 'Yr2', label: '2 Yr' },
+        { prop: 'Yr3', label: '3 Yr' },
+        { prop: 'Yr5', label: '5 Yr' },
+        { prop: 'Yr10', label: '10 Yr' }
+      ],
       tableData: [{
         Mo1: '1%',
         Mo3: '3%',
@@ -89,16 +81,42 @@ export default {
         Yr3: '7%',
         Yr5: '8%',
         Yr10: '9%'
-    }]
+      }]
     }
   }
 }
 </script>
-
-</script>
 <style rel="stylesheet/scss" lang="scss" scoped>
 .fundCard {
-    font-style: normal;
-    font-weight: 400;
+  font-style: normal;
+  font-weight: 400;
+}
+.header-side-wrap {
+  margin: 5px auto;
+  text-align: center;
+  color: green;
+}
+.header-title-wrap {
+  color: green;
+  margin: 5px auto;
+  font-weight: bold;
+}
+.nav-wrap, .code-wrap{
+  font-weight: bold;
+  font-size: large;
+}
+.mer-wrap, .title-wrap {
+  font-size: small;
+}
+.green-border {
+  border-bottom: 1px solid green;
+}
+.fund-info-wrapper {
+  margin: 0px 25px 0px 0px;
+  display: inline-block;
+  float: left;
+}
+.fund-info {
+  margin: 5px 0px;
 }
 </style>

@@ -21,8 +21,11 @@
       </el-table-column>
     </el-table>
     <div class="card-wrapper">
-      <el-row :gutter="32">
-        <el-col :span="16" :offset="8">
+      <el-row :gutter="12">
+        <el-col :span="8">
+          <el-button type="success" style="width:80%; margin-top:5px;" @click.native.prevent="clearGoal">Reset</el-button>
+        </el-col>
+        <el-col :span="16">
           <el-card shadow="always">
             Your net saving will be: {{ totalSaving }}
           </el-card>
@@ -41,6 +44,7 @@ export default {
   data() {
     return {
       list: null,
+      originalList: null,
       listLoading: true,
       totalSaving: 0
     }
@@ -67,6 +71,19 @@ export default {
         return accumulator - currentValue.customAmount
       }, this.netIncome)
       this.totalSaving = Math.round(saving * 100) / 100
+      this.setGoalBalance()
+    },
+    clearGoal() {
+      this.list = this.list.map(item => {
+        return {
+          category: item.category,
+          amount: item.amount,
+          customAmount: item.amount
+        }
+      })
+      this.calculateSaving()
+    },
+    setGoalBalance() {
       var balance = {
         goalSaving: this.totalSaving,
         goalSpending: this.netIncome - this.totalSaving
@@ -77,7 +94,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'netIncome'
+      'netIncome',
+      'netSaving'
     ])
   }
 }
