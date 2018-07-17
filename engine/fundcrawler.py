@@ -34,6 +34,7 @@ def GetFundInfo():
     date = re.search(r'(Jan(uary)?|Feb(ruary)?|Mar(ch)?|Apr(il)?|May|Jun(e)?|Jul(y)?|Aug(ust)?|Sep(tember)?|Oct(ober)?|Nov(ember)?|Dec(ember)?)\s+\d{1,2},\s+\d{4}', navHtml.get_text())
     nav = navHtml.find_all('strong')[0].get_text()
     change = navHtml.find_all('strong')[1].get_text()
+    change = change.replace(u'\xa0', u' ')
     attribution["date"] = date.group()
     attribution["nav"] = nav.strip()
     attribution["change"] = change.strip()
@@ -52,7 +53,8 @@ def GetFundInfo():
 
     returnList["attribution"] = attribution
     returnList["performanceList"] = performanceList
+    print(returnList)
     return returnList
 
 if __name__ == "__main__":
-    print(GetFundInfo())
+    GetFundInfo()
