@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'FundCard',
   props: ['fundId'],
@@ -92,9 +94,9 @@ export default {
         { prop: 'YR3', label: '3 Yr' },
         { prop: 'YR5', label: '5 Yr' },
         { prop: 'Inception', label: 'Inception' },
-        { prop: 'InceptionDate', label: 'InceptionDate' },
+        { prop: 'InceptionDate', label: 'InceptionDate' }
       ],
-      tableData:[],
+      tableData: [],
       /*
       tableData: [{
         Mo1: this.fund.performanceList.Mo1,
@@ -113,15 +115,16 @@ export default {
       dataReady: false
     }
   },
-  mounted () {
+  mounted() {
     this.fetchData()
   },
   methods: {
     fetchData() {
       // GET /someUrl
-      axios.get("http://localhost:3000/fundInfo/" + this.fundId).then(response => {
+      axios.get('http://localhost:3000/fundInfo/' + this.fundId).then(response => {
         this.fund = response.data
         this.tableData.push(response.data.performanceList)
+        console.log(response.data)
         this.dataReady = true
       })
     }
