@@ -83,6 +83,13 @@ export default {
           this.loading = true
           this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
             this.loading = false
+            var balance = {
+              netIncome: 1000,
+              netSaving: 100,
+              netSpending: 0
+            }
+            this.$store.dispatch('setNetBalance', balance)
+            this.$store.dispatch('setFundList', 'low')
             this.$router.push({ path: '/' })
           }).catch(() => {
             this.loading = false

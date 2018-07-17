@@ -31,6 +31,7 @@ import TransactionTable from './components/TransactionTable'
 // import FundOptions from './components/FundOptions'
 // import FundCard from './components/FundCard'
 import FundCard from '../../../components/FundCard'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'dashboard-admin',
@@ -39,21 +40,10 @@ export default {
     TransactionTable,
     FundCard
   },
-  data() {
-    return {
-      netIncome: 1000
-    }
-  },
-  created() {
-    // will need to call something for getting net balance
-    this.netIncome = 1000
-    var balance = {
-      netIncome: this.netIncome,
-      netSaving: 100,
-      netSpending: 0
-    }
-    this.$store.dispatch('setNetBalance', balance)
-    this.$store.dispatch('setFundList', 'low')
+  computed: {
+    ...mapGetters([
+      'netIncome'
+    ])
   }
 }
 </script>
