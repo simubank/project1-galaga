@@ -19,7 +19,6 @@
           <el-col :span="18">
             <div class="fund-info-wrapper">
               <div class="fund-info"><b>Category:</b> {{fund.attribution.category}}</div>
-              <div class="fund-info"><b>Min Invest:</b> {{fund.attribution.minInvest}}</div>
             </div>
             <div class="fund-info-wrapper">
               <div class="fund-info"><b>Min Invest:</b> {{fund.attribution.minInvest}}</div>
