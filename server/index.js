@@ -1,5 +1,9 @@
 var express = require('express');
 var app = express();
+var cors = require('cors')
+
+app.use(cors())
+
 
 
 app.get('/fundInfo/:id',function(req, res){
@@ -12,6 +16,7 @@ app.get('/fundInfo/:id',function(req, res){
     pythonProcess.stdout.on('end', function(){
         dataString = dataString.replace(/[\n\r]/g, '');
         dataString = dataString.replace(/'/g,'"');
+        console.log(dataString);
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.parse(dataString));
     });
@@ -27,10 +32,12 @@ app.get('/customer/:customerId/trasaction',function(req, res){
     pythonProcess.stdout.on('end', function(){
         dataString = dataString.replace(/[\n\r]/g, '');
         dataString = dataString.replace(/'/g,'"');
+        console.log(dataString);
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.parse(dataString));
     });
 });
+
 
 
 

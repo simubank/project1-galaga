@@ -30,7 +30,11 @@ def GetFundInfo():
 
     for dataset in datasets:
         for field in dataset:
-        	performanceList[field[0].replace(" ", "")] = field[1].strip()
+            key = field[0].replace(" ", "")
+            if(re.match(r'^(\d+)\s*(.+)', key) != None):
+                key = re.findall(r'^(\d+)\s*(.+)', key)
+                key = key[0][1] + key[0][0]
+            performanceList[key] = field[1].strip()
 
     date = re.search(r'(Jan(uary)?|Feb(ruary)?|Mar(ch)?|Apr(il)?|May|Jun(e)?|Jul(y)?|Aug(ust)?|Sep(tember)?|Oct(ober)?|Nov(ember)?|Dec(ember)?)\s+\d{1,2},\s+\d{4}', navHtml.get_text())
     nav = navHtml.find_all('strong')[0].get_text()
