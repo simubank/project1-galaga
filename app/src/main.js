@@ -17,6 +17,10 @@ import './mock' // simulation data
 
 import * as filters from './filters' // global filters
 import VueResource from 'vue-resource'
+import VueWait from 'vue-wait'
+
+Vue.use(VueWait)
+window.axios = require('axios')
 
 Vue.use(VueResource)
 
