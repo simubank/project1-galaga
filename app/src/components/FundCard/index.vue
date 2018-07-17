@@ -5,7 +5,7 @@
                 <el-row :gutter="20">
                   <el-col :span="20">
                       <h4 style="margin-bottom:0px;">TDB903</h4>
-                      <h4>TD Dow Jones Industrial Avg Index - e</h4>
+                      <h4>TD Dow Jones Industrial Avg Index - e {{ fundId }}</h4>
                   </el-col>
                   <el-col :span="4">
                       MER:0.01%</br>
@@ -77,16 +77,7 @@
 <script>
 export default {
   name: 'FundCard',
-  props: {
-    isActive: {
-      type: Boolean,
-      default: false
-    },
-    toggleClick: {
-      type: Function,
-      default: null
-    }
-  },
+  props: ['fundId'],
   data() {
     return {
       tableData: [{
@@ -98,7 +89,7 @@ export default {
         Yr3: '7%',
         Yr5: '8%',
         Yr10: '9%'
-      }]
+    }]
     }
   }
 }

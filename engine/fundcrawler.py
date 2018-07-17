@@ -13,6 +13,7 @@ def GetFundInfo():
     merHtml = soup.find("label", attrs={"for":"mer"})
     categoryHtml = soup.find("label", attrs={"for":"category"})
     minInvestHtml = soup.find("label", attrs={"for":"minimumInvestment"})
+    descriptionHtml = soup.find("input", attrs={"id":"fundNameHidden"})
 
     returnList = {}
     performanceList = {}
@@ -46,9 +47,12 @@ def GetFundInfo():
     minInvest = minInvestHtml.find_all('strong')[0].get_text()
     attribution["minInvest"] = minInvest.strip()
 
+    description = descriptionHtml.get('value')
+    attribution["description"] = description.strip()
+
     returnList["attribution"] = attribution
     returnList["performanceList"] = performanceList
     return returnList
 
 if __name__ == "__main__":
-    GetFundInfo()
+    print(GetFundInfo())

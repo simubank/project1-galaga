@@ -53,6 +53,7 @@ export default {
       netSpending: 0
     }
     this.$store.dispatch('setNetBalance', balance)
+    this.$store.dispatch('setFundList', 'low')
   }
 }
 </script>

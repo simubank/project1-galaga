@@ -6,6 +6,7 @@ import tagsView from './modules/tagsView'
 import user from './modules/user'
 import netBalance from './modules/netBalance'
 import getters from './getters'
+import fundList from './modules/fundList'
 
 Vue.use(Vuex)
 
@@ -15,7 +16,8 @@ const store = new Vuex.Store({
     permission,
     tagsView,
     user,
-    netBalance
+    netBalance,
+    fundList
   },
   getters
 })
