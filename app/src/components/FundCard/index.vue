@@ -8,8 +8,16 @@
             <div class="header-title-wrap title-wrap">{{fund.attribution.description}}</div>
           </el-col>
           <el-col :span="8">
-            <div class="header-side-wrap nav-wrap">NAV: {{fund.attribution.nav}} Change: {{fund.attribution.change}}</div>
-            <div class="header-side-wrap mer-wrap">MER: {{fund.attribution.mer}}</div>
+            <div class="header-side-wrap nav-wrap">
+              <el-tooltip content="Net asset value (NAV) is value per share of a mutual fund" placement="top">
+                <el-button>NAV: {{fund.attribution.nav}}</el-button>
+              </el-tooltip>
+            </div>
+            <div class="header-side-wrap mer-wrap">
+              <el-tooltip content="management fee of a mutual fund" placement="top">
+                <el-button>MER: {{fund.attribution.mer}}</el-button>
+              </el-tooltip>
+            </div>
           </el-col>
         </el-row>
       </el-header>
@@ -160,5 +168,19 @@ export default {
 }
 .fund-info {
   margin: 5px 0px;
+}
+.mer-wrap button, .nav-wrap button{
+  border: 0px;
+  background-color: white;
+  color: green;
+  padding: 0px;
+}
+.nav-wrap button {
+  font-weight: bold;
+  font-size: large;
+}
+.nav-wrap button:hover, .mer-wrap button:hover {
+  background-color: white;
+  color: green;
 }
 </style>
