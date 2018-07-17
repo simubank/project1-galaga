@@ -14,9 +14,7 @@
               </el-tooltip>
             </div>
             <div class="header-side-wrap mer-wrap">
-              <el-tooltip content="management fee of a mutual fund" placement="top">
-                <el-button>MER: {{fund.attribution.mer}}</el-button>
-              </el-tooltip>
+              <div class="header-side-wrap mer-wrap">{{fund.attribution.date}}</div>
             </div>
           </el-col>
         </el-row>
@@ -31,6 +29,9 @@
             <div class="fund-info-wrapper">
               <div class="fund-info"><b>Min Invest:</b> {{fund.attribution.minInvest}}</div>
               <!--<div class="fund-info"><b>Risk:</b> {{fund.risk}}</div> -->
+            </div>
+            <div class="fund-info-wrapper">
+              <div class="fund-info"><b>MER: </b>{{fund.attribution.mer}}</div>
             </div>
             <!-- Return Table -->
             <el-table :data="tableData" style="width: 100%">
@@ -52,6 +53,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'FundCard',
   props: ['fundId'],
@@ -100,9 +103,9 @@ export default {
         { prop: 'YR3', label: '3 Yr' },
         { prop: 'YR5', label: '5 Yr' },
         { prop: 'Inception', label: 'Inception' },
-        { prop: 'InceptionDate', label: 'InceptionDate' },
+        { prop: 'InceptionDate', label: 'InceptionDate' }
       ],
-      tableData:[],
+      tableData: [],
       /*
       tableData: [{
         Mo1: this.fund.performanceList.Mo1,
@@ -121,15 +124,16 @@ export default {
       dataReady: false
     }
   },
-  mounted () {
+  mounted() {
     this.fetchData()
   },
   methods: {
     fetchData() {
       // GET /someUrl
-      axios.get("http://localhost:3000/fundInfo/" + this.fundId).then(response => {
+      axios.get('http://localhost:3000/fundInfo/' + this.fundId).then(response => {
         this.fund = response.data
         this.tableData.push(response.data.performanceList)
+        console.log(response.data)
         this.dataReady = true
       })
     }
