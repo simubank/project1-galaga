@@ -9,7 +9,7 @@
           </el-col>
           <el-col :span="8">
             <div class="header-side-wrap nav-wrap">NAV: {{fund.attribution.nav}} Change: {{fund.attribution.change}}</div>
-            <div class="header-side-wrap mer-wrap">MER: {{fund.attribution.mer}}</div>
+            <div class="header-side-wrap mer-wrap">{{fund.attribution.date}}</div>
           </el-col>
         </el-row>
       </el-header>
@@ -24,6 +24,9 @@
               <div class="fund-info"><b>Min Invest:</b> {{fund.attribution.minInvest}}</div>
               <!--<div class="fund-info"><b>Risk:</b> {{fund.risk}}</div> -->
             </div>
+            <div class="fund-info-wrapper">
+              <div class="fund-info"><b>MER: </b>{{fund.attribution.mer}}</div>
+            </div>              
             <!-- Return Table -->
             <el-table :data="tableData" style="width: 100%">
               <el-table-column v-for="(header,index) of tableHeader" :prop="header.prop" :label="header.label" :key="index">
