@@ -1,4 +1,5 @@
 
+
 def get_customer_transaction_data(customer_id):
     import json
     import pandas as pd
@@ -15,7 +16,10 @@ def get_customer_transaction_data(customer_id):
     df_transaction = df_transaction.sort_values(by='originationDate')
     #flatten the category tag list 
     categoryTags_list = df_transaction['categoryTags'].tolist()
-    flat_list = [item for sublist in categoryTags_list for item in sublist]
+    flat_list = []
+    for item in categoryTags_list:
+        str1 = ' '.join(item)
+        flat_list.append(str1)
     df_transaction['categoryTags'] = flat_list
     #convert all creditcard purchase to negative values
     df_transaction.loc[df_transaction.type == 'CreditCardTransaction', 'currencyAmount'] = -1 * df_transaction['currencyAmount']
@@ -47,6 +51,4 @@ def get_customer_transaction_data(customer_id):
 
 
 
-
-get_customer_transaction_data('297f00cb-58a7-4a03-97e0-c8d09d0aea55_e2ba9727-a181-48f6-a1bc-0abf5ce173a2')
 
