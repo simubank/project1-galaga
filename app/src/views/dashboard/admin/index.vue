@@ -18,7 +18,7 @@
     </el-row>
     <el-row :gutter="32">
       <el-col :xs="24" :sm="24" :lg="24">
-        <p>Do you know how much you could have saved if you inverst with TD 5 years ago with your saving?   <el-button type="success">Click to checkout!</el-button></p>
+        <p>Do you know how much you could have saved if you inverst with TD 5 years ago with your saving?   <el-button type="success"><router-link to="fundlist">Click to checkout!</router-link></el-button></p>
       </el-col>
     </el-row>
   </div>
