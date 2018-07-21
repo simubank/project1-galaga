@@ -50,14 +50,18 @@
       </el-main>
     </el-container>
   </el-card>
+  <el-card class="fundCard" v-else>
+    <loader></loader>
+  </el-card>
 </template>
 
 <script>
 import axios from 'axios'
-
+import loader from '@/components/Loader'
 export default {
   name: 'FundCard',
   props: ['fundId'],
+  components: { loader },
   data() {
     return {
       /*

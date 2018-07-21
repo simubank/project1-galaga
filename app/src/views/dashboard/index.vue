@@ -20,6 +20,7 @@ export default {
         this.$store.dispatch('setNetIncome', 1000)
         this.$store.dispatch('setOriginalSpendingList', list)
         this.$store.dispatch('updateNetBalance', list)
+        this.$store.dispatch('setFundList', 'low')
       })
     }
   }
