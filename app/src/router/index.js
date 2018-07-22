@@ -50,6 +50,17 @@ export const constantRouterMap = [
       name: 'fundlist',
       meta: { title: 'Fundlist', icon: 'dollar', noCache: true }
     }]
+  },
+  {
+    path: '/learning',
+    component: Layout,
+    redirct: 'noredirect',
+    children: [{
+      path: 'learning',
+      component: () => import('@/views/learn/index'),
+      name: 'learning',
+      meta: { title: 'Learning', icon: 'clipboard', noCache: true }
+    }]
   }
 ]
 
