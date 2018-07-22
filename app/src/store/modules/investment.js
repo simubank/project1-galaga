@@ -1,3 +1,7 @@
+function roundNumber(number) {
+  return Math.round(number * 100) / 100
+}
+
 const investment = {
   state: {
     list: [],
@@ -19,8 +23,8 @@ const investment = {
       }
     },
     SET_GAIN: (state, gain) => {
-      state.gain.Yr1 = Math.round(gain.Yr1 * 100) / 100
-      state.gain.Yr5 = Math.round(gain.Yr5 * 100) / 100
+      state.gain.Yr1 = roundNumber(gain.Yr1)
+      state.gain.Yr5 = roundNumber(gain.Yr5)
     },
     SET_INVESTMENT_VALID: (state, isValid) => {
       state.isValid = isValid

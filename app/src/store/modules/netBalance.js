@@ -4,6 +4,30 @@ function calculateBalance(list, income) {
   }, income)
   return Math.round(saving * 100) / 100
 }
+
+function calculateIncome(list) {
+  var income = list.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue.amount
+  }, 0)
+  return Math.round(income * 100) / 100
+}
+
+function converList(list) {
+  var returnList = []
+  for (var key in list) {
+    var obj = {
+      category: key,
+      amount: Math.round(list[key] * 100) / 100
+    }
+    returnList.push(obj)
+  }
+  return returnList
+}
+
+function roundNumber(number) {
+  return Math.round(number * 100) / 100
+}
+
 const netBalance = {
 
   state: {
@@ -11,49 +35,64 @@ const netBalance = {
     spending: 0,
     saving: 0,
     isLoading: true,
-    list: [],
-    originalList: []
+    spendingList: [],
+    incomeList: [],
+    originalSpendingList: [],
+    originalIncomeList: []
   },
 
   mutations: {
     SET_NET_SAVING: (state, saving) => {
-      state.saving = saving
+      state.saving = roundNumber(saving)
     },
     SET_NET_INCOME: (state, income) => {
-      state.income = income
+      state.income = roundNumber(income)
     },
     SET_NET_SPENDING: (state, spending) => {
-      state.spending = spending
+      state.spending = roundNumber(spending)
     },
     SET_SPENDING_LIST: (state, list) => {
-      state.list = list.map(item => {
+      state.spendingList = list.map(item => {
         return {
           category: item.category,
-          amount: item.amount
+          amount: roundNumber(item.amount)
         }
       })
     },
     SET_ORIGINAL_SPENDING_LIST: (state, list) => {
-      state.originalList = list.map(item => {
+      state.originalSpendingList = list.map(item => {
         return {
           category: item.category,
-          amount: item.amount
+          amount: roundNumber(item.amount)
         }
       })
     },
     SET_IS_LOADING: (state) => {
       state.isLoading = false
+    },
+    SET_INCOME_LIST: (state, list) => {
+      state.incomeList = list.map(item => {
+        return {
+          category: item.category,
+          amount: roundNumber(item.amount)
+        }
+      })
+    },
+    SET_ORIGINAL_INCOME_LIST: (state, list) => {
+      state.originalIncomeList = list.map(item => {
+        return {
+          category: item.category,
+          amount: roundNumber(item.amount)
+        }
+      })
     }
   },
   actions: {
-    setNetBalance({ commit }, balance) {
-      commit('SET_NET_SAVING', balance.netSaving)
-      commit('SET_NET_INCOME', balance.netIncome)
-      commit('SET_NET_SPENDING', balance.netSpending)
-    },
-
-    setNetIncome({ commit }, income) {
+    updateIncome({ commit }, list) {
+      var income = calculateIncome(list)
       commit('SET_NET_INCOME', income)
+      commit('SET_INCOME_LIST', list)
+      commit('SET_NET_SAVING', income - this.state.netBalance.spending)
     },
 
     updateNetBalance({ commit }, list) {
@@ -63,18 +102,29 @@ const netBalance = {
       commit('SET_SPENDING_LIST', list)
     },
 
-    setOriginalSpendingList({ commit }, list) {
-      commit('SET_ORIGINAL_SPENDING_LIST', list)
-      commit('SET_SPENDING_LIST', list)
-      commit('SET_IS_LOADING')
+    resetNetBalance({ commit }) {
+      var totalIncome = calculateIncome(this.state.netBalance.originalIncomeList)
+      var totalSaving = calculateBalance(this.state.netBalance.originalSpendingList, totalIncome)
+      commit('SET_SPENDING_LIST', this.state.netBalance.originalSpendingList)
+      commit('SET_INCOME_LIST', this.state.netBalance.originalIncomeList)
+      commit('SET_NET_SAVING', totalSaving)
+      commit('SET_NET_INCOME', totalIncome)
+      commit('SET_NET_SPENDING', totalIncome - totalSaving)
     },
 
-    resetNetBalance({ commit }) {
-      var totalSaving = calculateBalance(this.state.netBalance.originalList, this.state.netBalance.income)
-      commit('SET_SPENDING_LIST', this.state.netBalance.originalList)
-      commit('SET_NET_SAVING', totalSaving)
-      commit('SET_NET_SPENDING', this.state.netBalance.income - totalSaving)
-      commit('SET_SPENDING_LIST', this.state.netBalance.originalList)
+    initalizeBalance({ commit }, load) {
+      var incomeList = converList(load.incomeCategory)
+      commit('SET_INCOME_LIST', incomeList)
+      commit('SET_ORIGINAL_INCOME_LIST', incomeList)
+
+      var spendingList = converList(load.expenseCategory)
+      commit('SET_SPENDING_LIST', spendingList)
+      commit('SET_ORIGINAL_SPENDING_LIST', spendingList)
+
+      commit('SET_NET_INCOME', load.netIncome)
+      commit('SET_NET_SAVING', load.netBalance)
+      commit('SET_NET_SPENDING', load.netSpending)
+      commit('SET_IS_LOADING')
     },
 
     clearNetBalance({ commit }) {
@@ -83,6 +133,8 @@ const netBalance = {
       commit('SET_NET_SPENDING', 0)
       commit('SET_SPENDING_LIST', [])
       commit('SET_ORIGINAL_SPENDING_LIST', [])
+      commit('SET_INCOME_LIST', [])
+      commit('SET_ORIGINAL_INCOME_LIST', [])
     }
   }
 }

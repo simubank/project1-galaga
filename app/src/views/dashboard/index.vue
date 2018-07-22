@@ -35,16 +35,8 @@ export default {
         this.incomeCategory = response.data.incomeCategory
         this.expenseCategory = response.data.expenseCategory
         this.dataReady = true
-        var list = []
-        for (var key in this.expenseCategory) {
-          var expenseObject = {}
-          expenseObject['category'] = key
-          expenseObject['amount'] = Math.round(this.expenseCategory[key] * 100) / 100
-          list.push(expenseObject)
-        }
-        this.$store.dispatch('setNetIncome', this.netIncome)
-        this.$store.dispatch('setOriginalSpendingList', list)
-        this.$store.dispatch('updateNetBalance', list)
+
+        this.$store.dispatch('initalizeBalance', response.data)
         this.$store.dispatch('setFundList', 'low')
       })
     }
