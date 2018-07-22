@@ -13,7 +13,12 @@
         <el-dropdown-menu slot="dropdown">
           <router-link to="/">
             <el-dropdown-item>
-              dashboard
+              Spending
+            </el-dropdown-item>
+          </router-link>
+          <router-link to="/fundlist">
+            <el-dropdown-item>
+              Investing
             </el-dropdown-item>
           </router-link>
           <el-dropdown-item divided>

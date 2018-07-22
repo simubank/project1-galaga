@@ -32,12 +32,12 @@ export const constantRouterMap = [
   {
     path: '',
     component: Layout,
-    redirect: 'dashboard',
+    redirect: 'spending',
     children: [{
-      path: 'dashboard',
+      path: 'spending',
       component: () => import('@/views/dashboard/index'),
-      name: 'dashboard',
-      meta: { title: 'dashboard', icon: 'star', noCache: true }
+      name: 'Spending',
+      meta: { title: 'Spending', icon: 'star', noCache: true }
     }]
   },
   {
@@ -47,8 +47,8 @@ export const constantRouterMap = [
     children: [{
       path: 'fundlist',
       component: () => import('@/views/fundlist/index'),
-      name: 'fundlist',
-      meta: { title: 'Fundlist', icon: 'dollar', noCache: true }
+      name: 'Investing',
+      meta: { title: 'Investing', icon: 'dollar', noCache: true }
     }]
   }
 ]
