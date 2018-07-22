@@ -21,7 +21,7 @@
         </el-col>
         <el-col :span="16">
           <el-card shadow="always">
-            Your net saving will be: {{ netSaving }}
+            Your net saving will be: ${{ netSaving }}
           </el-card>
         </el-col>
       </el-row>

@@ -9,7 +9,8 @@ const user = {
     token: getToken(),
     name: '',
     avatar: '',
-    roles: []
+    roles: [],
+    customerID: ''
   },
 
   mutations: {
@@ -30,6 +31,9 @@ const user = {
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles
+    },
+    SET_CUSTOMERID: (state, customerID) => {
+      state.customerID = customerID
     }
   },
 
@@ -41,6 +45,7 @@ const user = {
         loginByUsername(username, userInfo.password).then(response => {
           const data = response.data
           commit('SET_TOKEN', data.token)
+          commit('SET_CUSTOMERID', data.customerID)
           setToken(response.data.token)
           resolve()
         }).catch(error => {

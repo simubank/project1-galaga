@@ -22,7 +22,7 @@ app.get('/fundInfo/:id',function(req, res){
     });
 });
 
-app.get('/customer/:customerId/trasaction',function(req, res){
+app.get('/customer/:customerId/transaction',function(req, res){
     const spawn = require("child_process").spawn;
     const pythonProcess = spawn('python3',["../engine/getCustomerTransaction.py", req.params.customerId]);
     var dataString = '';
