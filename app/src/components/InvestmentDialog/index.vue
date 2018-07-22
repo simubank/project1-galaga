@@ -22,7 +22,10 @@
         <p>If you made the investment <b>1 Year ago</b> with TD, you would have made: <b>${{investmentGain.Yr1}}</b> and your saving will be: <b>${{Math.round((investmentGain.Yr1 + netSaving) * 100) / 100}}</b>!</p>
         <p>If you made the investment <b>5 Year ago</b> with TD, you would have made: <b>${{investmentGain.Yr5}}</b> and your saving will be: <b>${{Math.round((investmentGain.Yr5 + netSaving) * 100) / 100}}</b>!</p>
         <p>It's never TOO LATE to start investment, talk with TD to find the best investment options for your!</p>
-        <el-button @click="goTDInvest" type="success">TD Investment</el-button>
+        <el-button @click="goTDInvest" type="success">Request a Call Back</el-button>
+        <div class="disclaimer"><p>Disclaimer: This Projected Saving displays what your portfolio income might look like based on previous historical performance.
+          This is for estimation purpose ONLY, and TD <b> does NOT </b> garuantee you will make the same amount of money. </p>
+        </div>
       </el-col>
     </el-row>
 
@@ -53,12 +56,16 @@ export default {
       done()
     },
     goTDInvest() {
-      const url = 'https://www.td.com/ca/en/personal-banking/products/saving-investing/'
+      const url = 'https://www.forms.td.com/app/di-request-call/#/di-request-call/di-request-call-form'
       window.open(url, '_blank')
     }
   }
 }
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
-
+.disclaimer{
+  background-color: #FFFACD;
+  font-weight: bold;
+  font-size: small;
+}
 </style>
