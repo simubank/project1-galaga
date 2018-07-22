@@ -2,9 +2,16 @@
   <div class="login-container">
     <el-form class="login-form" autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left">
 
-      <div class="title-container">
-        <h3 class="title">Login</h3>
-      </div>
+      <el-row>
+        <el-col :span="6" :offset="6">
+          <img src="TD-logo.jpg">
+        </el-col>
+        <el-col :span="12">
+          <div class="title-container">
+                <h3 class="title">Login</h3>
+          </div>
+        </el-col>
+      </el-row>
 
       <el-form-item prop="username">
         <span class="svg-container svg-container_login">
@@ -26,11 +33,6 @@
       </el-form-item>
 
       <el-button type="success" style="width:100%;margin-bottom:30px;" :loading="loading" @click.native.prevent="handleLogin">Login</el-button>
-
-      <div class="tips">
-        <span>username: admin</span>
-        <span>password : anything longer than 6 digits</span>
-      </div>
 
     </el-form>
   </div>
@@ -134,6 +136,10 @@ $light_gray:#eee;
 $bg:#12412A;
 $dark_gray:#889aa4;
 $light_gray:#eee;
+img {
+    width: 50%;
+    position: relative;
+}
 
 .login-container {
   position: fixed;
@@ -174,8 +180,8 @@ $light_gray:#eee;
       font-size: 26px;
       font-weight: 400;
       color: $light_gray;
-      margin: 0px auto 40px auto;
-      text-align: center;
+      margin: 10px auto 40px auto;
+      text-align: left;
       font-weight: bold;
     }
     .set-language {
