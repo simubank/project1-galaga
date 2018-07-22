@@ -8,9 +8,7 @@ import netBalance from './modules/netBalance'
 import getters from './getters'
 import fundList from './modules/fundList'
 import investment from './modules/investment'
-import { Store } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
-import * as Cookies from 'js-cookie'
 
 Vue.use(Vuex)
 
