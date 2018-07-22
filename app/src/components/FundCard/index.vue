@@ -43,7 +43,7 @@
           <el-col :span="6">
             <div class="block">
               <span class="demonstration">Drag to invest your saving (%)</span>
-              <el-slider v-model="input"></el-slider>
+              <el-slider v-model="inputPercentage" v-on:change="updateInvestment"></el-slider>
             </div>
           </el-col>
         </el-row>
@@ -125,7 +125,9 @@ export default {
       }],
       */
       fund: null,
-      dataReady: false
+      dataReady: false,
+      symbol: '',
+      inputPercentage: 0
     }
   },
   mounted() {
@@ -137,9 +139,22 @@ export default {
       axios.get('http://localhost:3000/fundInfo/' + this.fundId).then(response => {
         this.fund = response.data
         this.tableData.push(response.data.performanceList)
+        this.symbol = this.fund.attribution.symbol
         console.log(response.data)
+        var investmentOption = {
+          rate: Number(response.data.performanceList.YR5),
+          id: this.symbol
+        }
+        this.$store.dispatch('initalizeInvestment', investmentOption)
         this.dataReady = true
       })
+    },
+    updateInvestment() {
+      var load = {
+        id: this.symbol,
+        percentage: this.inputPercentage
+      }
+      this.$store.dispatch('setInvestment', load)
     }
   }
 }

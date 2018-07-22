@@ -17,6 +17,9 @@ const getters = {
   netSpending: state => state.netBalance.spending,
   netSpendingList: state => state.netBalance.list,
   fundList: state => state.fundList.list,
-  listLoading: state => state.netBalance.isLoading
+  listLoading: state => state.netBalance.isLoading,
+  investmentGain: state => state.investment.gain,
+  investmentDialogVisible: state => state.investment.dialogVisible,
+  isInvestmentValid: state => state.investment.isValid
 }
 export default getters
