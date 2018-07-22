@@ -7,12 +7,14 @@
             <el-col :span="16">
               <h3>Hi {{username}}</h3>
               <el-card shadow="always">
-                Your net saving will be: <b>${{ netSaving }}</b>
+                Your <b> Net Saving </b> is <b>${{ netSaving }}</b>
               </el-card>
             </el-col>
+            <!--
             <el-col :span="8">
               <el-button type="success" style="width:80%; margin-top:75px;" @click.native.prevent="clear">Reset</el-button>
             </el-col>
+            -->
           </el-row>
         </div>
         <div class="chart-wrapper">
