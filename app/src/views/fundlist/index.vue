@@ -7,6 +7,7 @@
         <el-button type="success" style="width:200px; margin:5px 30px; float:right" @click.native.prevent="simulate">Simulate</el-button>
     </el-row>
     <investment-dialog></investment-dialog>
+    <investment-error-dialog></investment-error-dialog>
   </div>
 </template>
 
@@ -14,21 +15,20 @@
 import fundCard from '@/components/FundCard'
 import { mapGetters } from 'vuex'
 import InvestmentDialog from '@/components/InvestmentDialog'
+import InvestmentErrorDialog from '@/components/InvestmentErrorDialog'
 export default {
   name: 'Fundlist',
   components: {
     fundCard,
-    InvestmentDialog
+    InvestmentDialog,
+    InvestmentErrorDialog
   },
   created() {
     this.$store.dispatch('clearInvestment')
   },
   methods: {
     simulate() {
-      console.log('try simulate')
-      if (this.isInvestmentValid) {
-        this.$store.dispatch('openInvestmentDialog')
-      }
+      this.$store.dispatch('openInvestmentDialog')
     }
   },
   computed: {

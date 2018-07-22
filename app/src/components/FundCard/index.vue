@@ -64,40 +64,6 @@ export default {
   components: { loader },
   data() {
     return {
-      /*
-      input: 0,
-      fund: {
-        mer: '0.2%',
-        nav: '30',
-        code: 'TDB903',
-        title: 'TD NASDAQ Index - e',
-        category: 'sector',
-        minInvest: '100',
-        style: 'large blend',
-        risk: 'high',
-        change: '-0.09 (-0.40%)'
-      },
-      tableHeader: [
-        { prop: 'Mo1', label: '1 Mo' },
-        { prop: 'Mo3', label: '3 Mo' },
-        { prop: 'Mo6', label: '6 Mo' },
-        { prop: 'Yr1', label: '1 Yr' },
-        { prop: 'Yr2', label: '2 Yr' },
-        { prop: 'Yr3', label: '3 Yr' },
-        { prop: 'Yr5', label: '5 Yr' },
-        { prop: 'Yr10', label: '10 Yr' }
-      ],
-      tableData: [{
-        Mo1: '1%',
-        Mo3: '3%',
-        Mo6: '4%',
-        Yr1: '5%',
-        Yr2: '6%',
-        Yr3: '7%',
-        Yr5: '8%',
-        Yr10: '9%'
-      }]
-      */
       tableHeader: [
         { prop: 'Mo1', label: '1 Mo' },
         { prop: 'Mo3', label: '3 Mo' },
@@ -110,20 +76,6 @@ export default {
         { prop: 'InceptionDate', label: 'InceptionDate' }
       ],
       tableData: [],
-      /*
-      tableData: [{
-        Mo1: this.fund.performanceList.Mo1,
-        Mo3: this.fund.performanceList.Mo3,
-        Mo6: this.fund.performanceList.Mo6,
-        Yr1: this.fund.performanceList.Yr1,
-        Yr2: this.fund.performanceList.Yr2,
-        Yr3: this.fund.performanceList.Yr3,
-        Yr5: this.fund.performanceList.Yr5,
-        Yr10: this.fund.performanceList.Yr10,
-        Inception: this.fund.performanceList.Inception,
-        InceptionDate: this.fund.performanceList.InceptionDate
-      }],
-      */
       fund: null,
       dataReady: false,
       symbol: '',
@@ -142,7 +94,10 @@ export default {
         this.symbol = this.fund.attribution.symbol
         console.log(response.data)
         var investmentOption = {
-          rate: Number(response.data.performanceList.YR5),
+          rate: {
+            Yr1: Number(response.data.performanceList.YR1),
+            Yr5: Number(response.data.performanceList.YR5)
+          },
           id: this.symbol
         }
         this.$store.dispatch('initalizeInvestment', investmentOption)
