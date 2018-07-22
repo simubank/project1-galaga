@@ -5,7 +5,7 @@ const getters = {
   cachedViews: state => state.tagsView.cachedViews,
   token: state => state.user.token,
   avatar: state => state.user.avatar,
-  name: state => state.user.name,
+  username: state => state.user.name,
   introduction: state => state.user.introduction,
   status: state => state.user.status,
   roles: state => state.user.roles,
@@ -15,8 +15,11 @@ const getters = {
   netIncome: state => state.netBalance.income,
   netSaving: state => state.netBalance.saving,
   netSpending: state => state.netBalance.spending,
-  goalSaving: state => state.netBalance.goalSaving,
-  goalSpending: state => state.netBalance.goalSpending,
-  fundList: state => state.fundList.list
+  netSpendingList: state => state.netBalance.list,
+  fundList: state => state.fundList.list,
+  listLoading: state => state.netBalance.isLoading,
+  investmentGain: state => state.investment.gain,
+  investmentDialogVisible: state => state.investment.dialogVisible,
+  isInvestmentValid: state => state.investment.isValid
 }
 export default getters

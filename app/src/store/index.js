@@ -7,6 +7,7 @@ import user from './modules/user'
 import netBalance from './modules/netBalance'
 import getters from './getters'
 import fundList from './modules/fundList'
+import investment from './modules/investment'
 
 Vue.use(Vuex)
 
@@ -17,7 +18,8 @@ const store = new Vuex.Store({
     tagsView,
     user,
     netBalance,
-    fundList
+    fundList,
+    investment
   },
   getters
 })

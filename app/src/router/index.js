@@ -41,7 +41,7 @@ export const constantRouterMap = [
     }]
   },
   {
-    path: '/fundlist',
+    path: '',
     component: Layout,
     redirct: 'noredirect',
     children: [{
