@@ -7,7 +7,7 @@
     center>
     <span>You total contribution has exceed 100%, please make sure the sum of your contribution is less than 100% of your saving.</span>
     <span slot="footer" class="dialog-footer">
-      <el-button @click="closeDialog" type="warning">Done</el-button>
+      <el-button v-on:click.prevent="closeDialog" type="warning">Done</el-button>
     </span>
   </el-dialog>
 </template>
@@ -23,9 +23,12 @@ export default {
   },
   methods: {
     closeDialog() {
+      this.$store.dispatch('clearInvestment')
       this.$store.dispatch('closeInvestmentDialog')
     },
     handleClose(done) {
+      this.$store.dispatch('clearInvestment')
+      this.$store.dispatch('closeInvestmentDialog')
       done()
     }
   }

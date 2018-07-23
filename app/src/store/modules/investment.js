@@ -36,12 +36,26 @@ const investment = {
       state.list = []
       state.gain = { Yr1: 0, Yr5: 0 }
       state.isValid = true
+      state.dialogVisible = false
+      state.errorDialogVisible = false
+      state.totalContribution = 0
     },
     SET_DIALOG: (state, isVisible) => {
       state.dialogVisible = isVisible
     },
     SET_ERROR_DIALOG: (state, isVisible) => {
       state.errorDialogVisible = isVisible
+    },
+    RESET_INVESTMENT: (state) => {
+      for (var i = 0; i < state.list.length; i++) {
+        state.list[i].percentage = 0
+      }
+      state.gain = { Yr1: 0, Yr5: 0 }
+      state.isValid = true
+      state.dialogVisible = false
+      state.errorDialogVisible = false
+      state.totalContribution = 0
+      console.log('reset')
     }
   },
   actions: {
@@ -70,7 +84,6 @@ const investment = {
         gain.Yr1 += this.state.netBalance.saving * item.rate.Yr1 / 100 * item.percentage / 100
         gain.Yr5 += this.state.netBalance.saving * item.rate.Yr5 / 100 * item.percentage / 100 * 5
       }
-      console.log(gain)
       var isValid = Boolean(sumPercentage <= 100)
       commit('SET_INVESTMENT_VALID', isValid)
       commit('SET_GAIN', gain)
@@ -81,14 +94,20 @@ const investment = {
       commit('SET_ERROR_DIALOG', false)
     },
     openInvestmentDialog({ commit }) {
+      console.log(this.state.investment)
       if (this.state.investment.isValid) {
         commit('SET_DIALOG', true)
+        commit('SET_ERROR_DIALOG', false)
       } else {
         commit('SET_ERROR_DIALOG', true)
+        commit('SET_DIALOG', false)
       }
     },
     clearInvestment({ commit }) {
       commit('CLEAR_INVESTMENT')
+    },
+    resetInvestment({ commit }) {
+      commit('RESET_INVESTMENT')
     }
   }
 }

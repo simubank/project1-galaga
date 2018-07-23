@@ -3,23 +3,25 @@ const fundList = {
   state: {
     list: [],
     risk: '',
-    invenstmentBeginDialogOpen: false
+    low: [5, 2, 3],
+    medium: [6410, 2100, 11],
+    high: [1791, 24, 422]
   },
 
   mutations: {
     SET_LIST: (state, risk) => {
       switch (risk) {
         case 'low':
-          state.list = [5, 2, 3]
+          state.list = state.low
           break
         case 'medium':
-          state.list = [6410, 2100, 11]
+          state.list = state.medium
           break
         case 'high':
-          state.list = [6877, 24, 422]
+          state.list = state.high
           break
         case 'all':
-          state.list = [5, 2, 3, 6410, 2100, 11, 6877, 24, 422]
+          state.list = state.high.concat(state.medium).concat(state.low)
           break
         default:
           state.list = []
@@ -31,9 +33,6 @@ const fundList = {
     },
     SET_RISK: (state, risk) => {
       state.risk = risk
-    },
-    SET_DIALOG: (state, isOpen) => {
-      state.invenstmentBeginDialogOpen = isOpen
     }
   },
   actions: {
@@ -45,9 +44,6 @@ const fundList = {
     },
     clearFundList({ commit }) {
       commit('CLEAR_LIST')
-    },
-    setInvestmentBeginDialog({ commit }, isOpen) {
-      commit('SET_DIALOG', isOpen)
     }
   }
 }

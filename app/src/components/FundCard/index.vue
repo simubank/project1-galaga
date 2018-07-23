@@ -41,6 +41,10 @@
                 {{fund.attribution.mer}}
               </div>
             </div>
+            <div class="fund-info-wrapper">
+              <div class="fund-info"><b>Risk Level:</b> {{riskLevel}}</div>
+              <!--<div class="fund-info"><b>Risk:</b> {{fund.risk}}</div> -->
+            </div>
             <!-- Return Table -->
             <el-table :data="tableData" style="width: 100%">
               <el-table-column v-for="(header,index) of tableHeader" :prop="header.prop" :label="header.label" :key="index" align="center" :min-width="index < 7 ? '65px' : '120px'">
@@ -66,9 +70,18 @@
 <script>
 import axios from 'axios'
 import loader from '@/components/Loader'
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'FundCard',
   props: ['fundId'],
+  computed: {
+    ...mapGetters([
+      'highRiskFund',
+      'mediumRiskFund',
+      'lowRiskFund'
+    ])
+  },
   components: { loader },
   data() {
     return {
@@ -87,11 +100,19 @@ export default {
       fund: null,
       dataReady: false,
       symbol: '',
-      inputPercentage: 0
+      inputPercentage: 0,
+      riskLevel: ''
     }
   },
   mounted() {
     this.fetchData()
+    if (this.highRiskFund.includes(this.fundId)) {
+      this.riskLevel = 'High'
+    } else if (this.mediumRiskFund.includes(this.fundId)) {
+      this.riskLevel = 'Medium'
+    } else {
+      this.riskLevel = 'Low'
+    }
   },
   methods: {
     fetchData() {
