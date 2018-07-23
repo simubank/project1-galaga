@@ -1,7 +1,9 @@
 const fundList = {
 
   state: {
-    list: []
+    list: [],
+    risk: '',
+    invenstmentBeginDialogOpen: false
   },
 
   mutations: {
@@ -16,20 +18,36 @@ const fundList = {
         case 'high':
           state.list = [6877, 24, 422]
           break
+        case 'all':
+          state.list = [5, 2, 3, 6410, 2100, 11, 6877, 24, 422]
+          break
         default:
-          state.list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+          state.list = []
       }
     },
     CLEAR_LIST: (state) => {
       state.list = []
+      state.risk = ''
+    },
+    SET_RISK: (state, risk) => {
+      state.risk = risk
+    },
+    SET_DIALOG: (state, isOpen) => {
+      state.invenstmentBeginDialogOpen = isOpen
     }
   },
   actions: {
     setFundList({ commit }, risk) {
       commit('SET_LIST', risk)
     },
+    setUserRisk({ commit }, risk) {
+      commit('SET_RISK', risk)
+    },
     clearFundList({ commit }) {
       commit('CLEAR_LIST')
+    },
+    setInvestmentBeginDialog({ commit }, isOpen) {
+      commit('SET_DIALOG', isOpen)
     }
   }
 }

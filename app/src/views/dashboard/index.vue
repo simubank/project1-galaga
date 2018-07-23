@@ -47,7 +47,7 @@ export default {
     fetchRisk() {
       axios.get('http://localhost:3000/customer/' + this.customerID + '/risk').then(response => {
         this.$store.dispatch('clearFundList')
-        this.$store.dispatch('setFundList', response.data.risk)
+        this.$store.dispatch('setUserRisk', response.data.risk)
       })
     }
   },

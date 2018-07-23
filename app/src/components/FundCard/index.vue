@@ -100,7 +100,6 @@ export default {
         this.fund = response.data
         this.tableData.push(response.data.performanceList)
         this.symbol = this.fund.attribution.symbol
-        console.log(response.data)
         var investmentOption = {
           rate: {
             Yr1: Number(response.data.performanceList.YR1),

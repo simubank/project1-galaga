@@ -26,6 +26,8 @@ const getters = {
   isInvestmentValid: state => state.investment.isValid,
   investmentOptions: state => state.investment.list,
   investmentContribution: state => state.investment.totalContribution,
-  initializedUser: state => state.user.isInitialized
+  initializedUser: state => state.user.isInitialized,
+  userRisk: state => state.fundList.risk,
+  invenstmentBeginDialogOpen: state => state.fundList.invenstmentBeginDialogOpen
 }
 export default getters
