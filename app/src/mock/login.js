@@ -21,6 +21,13 @@ const userMap = {
     avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
     name: 'Ivana Easom',
     customerID: '297f00cb-58a7-4a03-97e0-c8d09d0aea55_e2ba9727-a181-48f6-a1bc-0abf5ce173a2'
+  },
+  Sima: {
+    roles: ['customer'],
+    token: 'Sima',
+    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+    name: 'Sima Beliard',
+    customerID: '297f00cb-58a7-4a03-97e0-c8d09d0aea55_46e1ff05-48c1-4fe8-b645-39d157d97eff'
   }
 }
 
