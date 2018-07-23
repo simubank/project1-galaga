@@ -25,6 +25,7 @@ const getters = {
   investmentErrorDialogVisible: state => state.investment.errorDialogVisible,
   isInvestmentValid: state => state.investment.isValid,
   investmentOptions: state => state.investment.list,
-  investmentContribution: state => state.investment.totalContribution
+  investmentContribution: state => state.investment.totalContribution,
+  initializedUser: state => state.user.isInitialized
 }
 export default getters

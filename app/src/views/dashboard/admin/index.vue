@@ -10,11 +10,9 @@
                 Your <b> Net Saving </b> is <b>${{ netSaving }}</b>
               </el-card>
             </el-col>
-            <!--
             <el-col :span="8">
               <el-button type="success" style="width:80%; margin-top:75px;" @click.native.prevent="clear">Reset</el-button>
             </el-col>
-            -->
           </el-row>
         </div>
         <div class="chart-wrapper">
@@ -52,7 +50,6 @@ export default {
   },
   methods: {
     clear() {
-      console.log('clearing')
       this.$store.dispatch('resetNetBalance')
     }
   },

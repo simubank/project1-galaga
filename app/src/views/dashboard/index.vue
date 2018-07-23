@@ -23,9 +23,14 @@ export default {
       dataReady: false
     }
   },
-  mounted() {
-    this.fetchData()
-    this.fetchRisk()
+  created() {
+    if (!this.initializedUser) {
+      this.fetchData()
+      this.fetchRisk()
+      this.$store.dispatch('setIsInitialized', true)
+    } else {
+      this.dataReady = true
+    }
   },
   methods: {
     fetchData() {
@@ -36,7 +41,6 @@ export default {
         this.incomeCategory = response.data.incomeCategory
         this.expenseCategory = response.data.expenseCategory
         this.dataReady = true
-
         this.$store.dispatch('initalizeBalance', response.data)
       })
     },
@@ -49,7 +53,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'customerID'
+      'customerID',
+      'initializedUser'
     ])
   }
 }

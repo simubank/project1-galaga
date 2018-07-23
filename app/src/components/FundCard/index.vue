@@ -3,18 +3,21 @@
     <el-container>
       <el-header>
         <el-row class="green-border" :gutter="20">
-          <el-col :span="16">
+          <el-col :xs="{span: 24}" :sm="{span: 16}" :lg="{span: 16}">
             <div class="header-title-wrap code-wrap">{{fund.attribution.symbol}}</div>
             <div class="header-title-wrap title-wrap">{{fund.attribution.description}}</div>
           </el-col>
-          <el-col :span="8">
+          <el-col :xs="{span: 24}" :sm="{span: 8}" :lg="{span: 8}">
             <div class="header-side-wrap nav-wrap">
               <el-tooltip content="Net asset value (NAV) is value per share of a mutual fund" placement="top">
-                <el-button>NAV: {{fund.attribution.nav}}</el-button>
+                <el-button>NAV: </el-button>
               </el-tooltip>
+              {{fund.attribution.nav}}
             </div>
             <div class="header-side-wrap mer-wrap">
-              <div class="header-side-wrap mer-wrap">{{fund.attribution.date}}</div>
+              <div class="header-side-wrap mer-wrap">
+                  <span :class="fund.attribution.change[0] === '-' ? 'negative-change': 'positive-change'">{{fund.attribution.change}}</span> as {{fund.attribution.date}}
+              </div>
             </div>
           </el-col>
         </el-row>
@@ -22,7 +25,7 @@
       <!-- Include Info Bar and Return Table -->
       <el-main style="padding-top:0px">
         <el-row :gutter="20">
-          <el-col :span="18">
+          <el-col :xs="{span: 24}" :sm="{span: 18}" :lg="{span: 18}">
             <div class="fund-info-wrapper">
               <div class="fund-info"><b>Category:</b> {{fund.attribution.category}}</div>
             </div>
@@ -31,16 +34,21 @@
               <!--<div class="fund-info"><b>Risk:</b> {{fund.risk}}</div> -->
             </div>
             <div class="fund-info-wrapper">
-              <div class="fund-info"><b>MER: </b>{{fund.attribution.mer}}</div>
+              <div class="fund-info">
+                <el-tooltip content="Includes the management fee plus the fund's day-to-day operating expenses" placement="top">
+                  <el-button>MER:</el-button>
+                </el-tooltip>
+                {{fund.attribution.mer}}
+              </div>
             </div>
             <!-- Return Table -->
             <el-table :data="tableData" style="width: 100%">
-              <el-table-column v-for="(header,index) of tableHeader" :prop="header.prop" :label="header.label" :key="index">
+              <el-table-column v-for="(header,index) of tableHeader" :prop="header.prop" :label="header.label" :key="index" align="center" :min-width="index < 7 ? '65px' : '120px'">
               </el-table-column>
             </el-table>
           </el-col>
           <!-- User Invest Input -->
-          <el-col :span="6">
+          <el-col :xs="{span: 24}" :sm="{span: 6}" :lg="{span: 6}">
             <div class="block">
               <span class="demonstration">Drag to invest your saving (%)</span>
               <el-slider v-model="inputPercentage" v-on:change="updateInvestment"></el-slider>
@@ -157,8 +165,32 @@ export default {
   font-weight: bold;
   font-size: large;
 }
+.fund-info button {
+  border: 0px;
+  background-color: white;
+  padding: 0px;
+  font-size: medium;
+  color: black;
+  font-weight: bolder;
+}
 .nav-wrap button:hover, .mer-wrap button:hover {
   background-color: white;
   color: green;
+}
+.fund-info button:hover {
+  background-color: white;
+  color: black;
+}
+.fund-table>th:last-child {
+  min-width: 200px;
+  background-color: red
+}
+.negative-change {
+  color: red;
+  font-size: small;
+}
+.positive-change {
+  color: green;
+  font-size: small;
 }
 </style>

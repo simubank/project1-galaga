@@ -10,7 +10,8 @@ const user = {
     name: '',
     avatar: '',
     roles: [],
-    customerID: ''
+    customerID: '',
+    isInitialized: false
   },
 
   mutations: {
@@ -34,6 +35,9 @@ const user = {
     },
     SET_CUSTOMERID: (state, customerID) => {
       state.customerID = customerID
+    },
+    SET_IS_INITIALIZED: (state, isInitialized) => {
+      state.isInitialized = isInitialized
     }
   },
 
@@ -77,11 +81,16 @@ const user = {
       })
     },
 
+    setIsInitialized({ commit }, isInitialized) {
+      commit('SET_IS_INITIALIZED', isInitialized)
+    },
+
     LogOut({ commit, state }) {
       return new Promise((resolve, reject) => {
         logout(state.token).then(() => {
           commit('SET_TOKEN', '')
           commit('SET_ROLES', [])
+          commit('SET_IS_INITIALIZED', false)
           removeToken()
           resolve()
         }).catch(error => {
@@ -94,6 +103,7 @@ const user = {
     FedLogOut({ commit }) {
       return new Promise(resolve => {
         commit('SET_TOKEN', '')
+        commit('SET_IS_INITIALIZED', false)
         removeToken()
         resolve()
       })
