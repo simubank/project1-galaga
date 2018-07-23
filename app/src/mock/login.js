@@ -7,6 +7,13 @@ const userMap = {
     avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
     name: 'Jay Foraker',
     customerID: '297f00cb-58a7-4a03-97e0-c8d09d0aea55_ec59a644-7ec3-437a-a5aa-b00c9709785c'
+  },
+  Odalys: {
+    roles: ['customer'],
+    token: 'Odalys',
+    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+    name: 'Odalys Mcculley',
+    customerID: '297f00cb-58a7-4a03-97e0-c8d09d0aea55_c6107914-4779-4da1-8563-1191a5d4c2c7'
   }
 }
 

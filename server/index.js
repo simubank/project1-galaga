@@ -38,6 +38,22 @@ app.get('/customer/:customerId/transaction',function(req, res){
     });
 });
 
+app.get('/customer/:customerId/risk',function(req, res){
+    const spawn = require("child_process").spawn;
+    const pythonProcess = spawn('python3',["../engine/getCustomerRisk.py", req.params.customerId]);
+    var dataString = '';
+    pythonProcess.stdout.on('data', (data) => {
+          dataString += data.toString();
+    });
+    pythonProcess.stdout.on('end', function(){
+        dataString = dataString.replace(/[\n\r]/g, '');
+        dataString = dataString.replace(/'/g,'"');
+        console.log(dataString);
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.parse(dataString));
+    });
+});
+
 
 
 

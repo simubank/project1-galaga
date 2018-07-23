@@ -28,7 +28,7 @@ def rent_group(x):
     if x == 'rent' or x == 'sharingrent':
         group = 'rent'
         return group
- 
+
     else:
         group = 'rentfree'
         return group
@@ -83,14 +83,12 @@ def cutomer_risk_att(customer_id):
     df_cust['job group'] =  df_cust['primaryOccupation'].apply(job_group)
     df_cust['rent group'] =  df_cust['habitationStatus'].apply(rent_group)
     df_cust['risk'] = df_cust.apply(label_risk, axis=1)
-    
+
     risk_value = df_cust.iloc[0]['risk']
     risk_dict = dict()
     risk_dict['risk'] = risk_value
+    print(risk_dict)
     return risk_dict
 
 if __name__ == '__main__':
     cutomer_risk_att(sys.argv[1])
-
-
-

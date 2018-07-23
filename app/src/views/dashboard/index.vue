@@ -25,6 +25,7 @@ export default {
   },
   mounted() {
     this.fetchData()
+    this.fetchRisk()
   },
   methods: {
     fetchData() {
@@ -37,7 +38,12 @@ export default {
         this.dataReady = true
 
         this.$store.dispatch('initalizeBalance', response.data)
-        this.$store.dispatch('setFundList', 'low')
+      })
+    },
+    fetchRisk() {
+      axios.get('http://localhost:3000/customer/' + this.customerID + '/risk').then(response => {
+        this.$store.dispatch('clearFundList')
+        this.$store.dispatch('setFundList', response.data.risk)
       })
     }
   },
