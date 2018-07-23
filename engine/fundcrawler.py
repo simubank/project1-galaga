@@ -45,7 +45,8 @@ def GetFundInfo():
     attribution["change"] = change.strip()
 
     mer = merHtml.find_all('strong')[0].get_text()
-    attribution["mer"] = mer.strip()
+    mer = re.search(r'[\d.]+%', mer)
+    attribution["mer"] = mer.group()
 
     category = categoryHtml.find_all('strong')[0].get_text()
     attribution["category"] = category.strip()
