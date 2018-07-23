@@ -23,11 +23,9 @@ export default {
   },
   methods: {
     closeDialog() {
-      this.$store.dispatch('clearInvestment')
       this.$store.dispatch('closeInvestmentDialog')
     },
     handleClose(done) {
-      this.$store.dispatch('clearInvestment')
       this.$store.dispatch('closeInvestmentDialog')
       done()
     }

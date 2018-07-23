@@ -29,8 +29,9 @@ export default {
     InvestmentDialog,
     InvestmentErrorDialog
   },
-  mounted() {
+  created() {
     this.$store.dispatch('clearInvestment')
+    this.$store.dispatch('resetFundList')
     this.$store.dispatch('setFundList', this.userRisk)
   },
   methods: {
@@ -41,7 +42,7 @@ export default {
       return string.charAt(0).toUpperCase() + string.slice(1)
     },
     setAllFund() {
-      this.$store.dispatch('clearInvestment')
+      this.$store.dispatch('resetFundList')
       this.$store.dispatch('setFundList', 'all')
     }
   },

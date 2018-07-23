@@ -29,8 +29,8 @@ const fundList = {
     },
     CLEAR_LIST: (state) => {
       state.list = []
-      state.risk = ''
     },
+
     SET_RISK: (state, risk) => {
       state.risk = risk
     }
@@ -43,6 +43,10 @@ const fundList = {
       commit('SET_RISK', risk)
     },
     clearFundList({ commit }) {
+      commit('CLEAR_LIST')
+      commit('SET_RISK', '')
+    },
+    resetFundList({ commit }) {
       commit('CLEAR_LIST')
     }
   }

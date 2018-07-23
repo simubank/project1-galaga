@@ -55,6 +55,8 @@ export default {
       // clear netBalance on user logout
       this.$store.dispatch('clearNetBalance')
       this.$store.dispatch('clearFundList')
+      this.$store.dispatch('clearInvestment')
+      this.$store.dispatch('setUserRisk', '')
       this.$store.dispatch('LogOut').then(() => {
         location.reload()// In order to re-instantiate the vue-router object to avoid bugs
       })
