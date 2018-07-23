@@ -21,7 +21,7 @@ const fundList = {
           state.list = state.high
           break
         case 'all':
-          if (state.risk === 'low'){
+          if (state.risk === 'low') {
             state.list = state.list.concat(state.medium).concat(state.high)
           } else if (state.risk === 'medium') {
             state.list = state.list.concat(state.low).concat(state.high)
