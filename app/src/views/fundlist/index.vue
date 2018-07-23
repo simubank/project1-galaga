@@ -9,7 +9,7 @@
             <fund-card v-bind:fund-id="fundID"></fund-card>
           </el-col>
           <el-col :xs="{span: 24}" :sm="{span: 24}" :lg="{span: 24}" class="center">
-            <p>However, if you wish to have all fund options, please click here: <el-button type="success" @click="setAllFund">All Funds</el-button></p>
+            <p>However, if you wish to have all fund options, please click here: <el-button type="success" :disabled="isClicked" @click.once="setAllFund">All Funds</el-button></p>
           </el-col>
           <el-button type="success" style="width:200px; margin:20px 50px 50px 50px; float:right" v-on:click.stop.prevent="simulate">Simulate</el-button>
       </el-row>
@@ -29,6 +29,11 @@ export default {
     InvestmentDialog,
     InvestmentErrorDialog
   },
+  data() {
+    return {
+       isClicked: false
+    }
+  },
   created() {
     this.$store.dispatch('clearInvestment')
     this.$store.dispatch('resetFundList')
@@ -42,7 +47,7 @@ export default {
       return string.charAt(0).toUpperCase() + string.slice(1)
     },
     setAllFund() {
-      this.$store.dispatch('resetFundList')
+      this.isClicked = true
       this.$store.dispatch('setFundList', 'all')
     }
   },

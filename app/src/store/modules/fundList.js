@@ -21,7 +21,13 @@ const fundList = {
           state.list = state.high
           break
         case 'all':
-          state.list = state.high.concat(state.medium).concat(state.low)
+          if (state.risk === 'low'){
+            state.list = state.list.concat(state.medium).concat(state.high)
+          } else if (state.risk === 'medium') {
+            state.list = state.list.concat(state.low).concat(state.high)
+          } else {
+            state.list = state.list.concat(state.medium).concat(state.low)
+          }
           break
         default:
           state.list = []
