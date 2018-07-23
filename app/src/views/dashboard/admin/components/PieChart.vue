@@ -82,8 +82,8 @@ export default {
           name: 'spending distribution',
           type: 'pie',
           roseType: 'radius',
-          radius: [15, 95],
-          center: ['50%', '38%'],
+          radius: [25, 75],
+          center: ['50%', '40%'],
           data: this.list,
           animationEasing: 'cubicInOut',
           animationDuration: 2600
