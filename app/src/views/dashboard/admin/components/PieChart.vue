@@ -79,7 +79,7 @@ export default {
         },
         calculable: true,
         series: [{
-          name: 'spending distribution',
+          name: '',
           type: 'pie',
           roseType: 'radius',
           radius: [25, 75],

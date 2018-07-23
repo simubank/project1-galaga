@@ -13,7 +13,7 @@
         <el-dropdown-menu slot="dropdown">
           <router-link to="/">
             <el-dropdown-item>
-              Spending
+              Net Saving
             </el-dropdown-item>
           </router-link>
           <router-link to="/fundlist">
