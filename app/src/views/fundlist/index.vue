@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <p class="center">Based on our model, you have been determined as a <b>{{capitalizeFirstLetter(userRisk)}} Risk</b> investor, we have suggested you some funds.</p>
+      <p class="center">Based on our model, you can tolerate <b>{{capitalizeFirstLetter(userRisk)}} Risk Portfolio</b>, we have suggested you some funds.</p>
       <investment-dialog></investment-dialog>
       <investment-error-dialog></investment-error-dialog>
       <el-row :gutter="20">
