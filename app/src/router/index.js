@@ -27,17 +27,17 @@ import Layout from '@/views/layout/Layout'
 export const constantRouterMap = [
   { path: '/login', component: () => import('@/views/login/index'), hidden: true },
   { path: '/authredirect', component: () => import('@/views/login/authredirect'), hidden: true },
-  { path: '/404', component: () => import('@/views/errorPage/404'), hidden: true },
-  { path: '/401', component: () => import('@/views/errorPage/401'), hidden: true },
+  // { path: '/404', component: () => import('@/views/errorPage/404'), hidden: true },
+  // { path: '/401', component: () => import('@/views/errorPage/401'), hidden: true },
   {
     path: '',
     component: Layout,
-    redirect: 'dashboard',
+    redirect: 'spending',
     children: [{
-      path: 'dashboard',
+      path: 'spending',
       component: () => import('@/views/dashboard/index'),
-      name: 'dashboard',
-      meta: { title: 'dashboard', icon: 'star', noCache: true }
+      name: 'Net Saving',
+      meta: { title: 'Net Saving', icon: 'star', noCache: true }
     }]
   },
   {
@@ -47,8 +47,8 @@ export const constantRouterMap = [
     children: [{
       path: 'fundlist',
       component: () => import('@/views/fundlist/index'),
-      name: 'fundlist',
-      meta: { title: 'Fundlist', icon: 'dollar', noCache: true }
+      name: 'Investing',
+      meta: { title: 'Investing', icon: 'dollar', noCache: true }
     }]
   },
   {
@@ -70,20 +70,4 @@ export default new Router({
   routes: constantRouterMap
 })
 
-export const asyncRouterMap = [
-  {
-    path: '/error',
-    component: Layout,
-    redirect: 'noredirect',
-    name: 'errorPages',
-    meta: {
-      title: 'errorPages',
-      icon: '404'
-    },
-    children: [
-      { path: '401', component: () => import('@/views/errorPage/401'), name: 'page401', meta: { title: 'page401', noCache: true }},
-      { path: '404', component: () => import('@/views/errorPage/404'), name: 'page404', meta: { title: 'page404', noCache: true }}
-    ]
-  },
-  { path: '*', redirect: '/404', hidden: true }
-]
+export const asyncRouterMap = []

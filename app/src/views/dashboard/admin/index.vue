@@ -1,13 +1,20 @@
 <template>
   <div class="dashboard-editor-container">
     <el-row :gutter="32">
-      <el-col :xs="24" :sm="24" :lg="12">
-        <h2>Hi {{username}}</h2>
-        <p>You net income is: {{netIncome}}</p>
-      </el-col>
-    </el-row>
-    <el-row :gutter="32">
-      <el-col :xs="24" :sm="24" :lg="12">
+      <el-col :xs="{span: 24}" :sm="{span: 24}" :lg="{span: 12}">
+        <div class="card-wrapper">
+          <el-row :gutter="12">
+            <el-col :span="16">
+              <h3>Hi {{username}}</h3>
+              <el-card shadow="always">
+                Your <b> Net Saving </b> is <b>${{ netSaving }}</b>
+              </el-card>
+            </el-col>
+            <el-col :span="8">
+              <el-button type="success" style="width:80%; margin-top:75px;" @click.native.prevent="clear">Reset</el-button>
+            </el-col>
+          </el-row>
+        </div>
         <div class="chart-wrapper">
           <pie-chart></pie-chart>
         </div>
@@ -16,9 +23,10 @@
         <transaction-table></transaction-table>
       </el-col>
     </el-row>
+
     <el-row :gutter="32">
       <el-col :xs="24" :sm="24" :lg="24">
-        <p>Do you know how much you could have saved if you inverst with TD 5 years ago with your saving?   <el-button type="success"><router-link to="fundlist">Click to checkout!</router-link></el-button></p>
+        <p>Do you know how much you could have saved if you inverst with TD 5 years ago with your saving?   <el-button type="success" @click="goToFund">Click to checkout!</el-button></p>
       </el-col>
     </el-row>
   </div>
@@ -40,10 +48,19 @@ export default {
     TransactionTable,
     FundCard
   },
+  methods: {
+    clear() {
+      this.$store.dispatch('resetNetBalance')
+    },
+    goToFund() {
+      this.$router.push('fundlist')
+    }
+  },
   computed: {
     ...mapGetters([
       'netIncome',
-      'username'
+      'username',
+      'netSaving'
     ])
   }
 }
@@ -59,5 +76,9 @@ export default {
     padding: 16px 16px 0;
     margin-bottom: 32px;
   }
+}
+.card-wrapper{
+  margin-top: 15px;
+  margin-bottom: 20px;
 }
 </style>

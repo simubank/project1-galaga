@@ -2,35 +2,37 @@
   <div class="login-container">
     <el-form class="login-form" autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left">
 
-      <div class="title-container">
-        <h3 class="title">Login</h3>
-      </div>
+      <el-row>
+        <el-col :span="6" :offset="6">
+          <img src="TD-logo.jpg">
+        </el-col>
+        <el-col :span="12">
+          <div class="title-container">
+                <h3 class="title">Login</h3>
+          </div>
+        </el-col>
+      </el-row>
 
-      <el-form-item prop="username">
+      <el-form-item>
         <span class="svg-container svg-container_login">
           <svg-icon icon-class="user" />
         </span>
-        <el-input name="username" type="text" v-model="loginForm.username" autoComplete="on" :placeholder="username"
+        <el-input name="username" type="text" v-model="loginForm.username" autoComplete="on" placeholder="username"
         />
       </el-form-item>
 
-      <el-form-item prop="password">
+      <el-form-item>
         <span class="svg-container">
           <svg-icon icon-class="password" />
         </span>
         <el-input name="password" :type="passwordType" @keyup.enter.native="handleLogin" v-model="loginForm.password" autoComplete="on"
-          :placeholder="password" />
+          placeholder="password" />
         <span class="show-pwd" @click="showPwd">
           <svg-icon icon-class="eye" />
         </span>
       </el-form-item>
 
       <el-button type="success" style="width:100%;margin-bottom:30px;" :loading="loading" @click.native.prevent="handleLogin">Login</el-button>
-
-      <div class="tips">
-        <span>username: admin</span>
-        <span>password : anything longer than 6 digits</span>
-      </div>
 
     </el-form>
   </div>
@@ -58,7 +60,7 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
+        username: 'Sima',
         password: '1111111'
       },
       loginRules: {
@@ -134,6 +136,10 @@ $light_gray:#eee;
 $bg:#12412A;
 $dark_gray:#889aa4;
 $light_gray:#eee;
+img {
+    width: 50%;
+    position: relative;
+}
 
 .login-container {
   position: fixed;
@@ -174,8 +180,8 @@ $light_gray:#eee;
       font-size: 26px;
       font-weight: 400;
       color: $light_gray;
-      margin: 0px auto 40px auto;
-      text-align: center;
+      margin: 10px auto 40px auto;
+      text-align: left;
       font-weight: bold;
     }
     .set-language {

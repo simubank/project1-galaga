@@ -8,6 +8,7 @@ import netBalance from './modules/netBalance'
 import getters from './getters'
 import fundList from './modules/fundList'
 import investment from './modules/investment'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
@@ -21,6 +22,7 @@ const store = new Vuex.Store({
     fundList,
     investment
   },
+  plugins: [createPersistedState()],
   getters
 })
 
